@@ -11,3 +11,7 @@ Workflowy agenda view inside the browser.
 6. Complete your item and it'll disappear from the agenda
 
 ![Screenshot](https://raw.githubusercontent.com/palesz/workflowy-agenda-js/master/workflowy-agenda-screenshot.png)
+
+## Contributions
+
+are welcome, please feel free to send pull requests!
