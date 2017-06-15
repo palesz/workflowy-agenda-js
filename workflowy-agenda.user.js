@@ -2,7 +2,7 @@
 // @name        workflowy
 // @namespace   http://palesz.org/
 // @include     https://workflowy.com/*
-// @version     1
+// @version     1.1
 // @grant       none
 // ==/UserScript==
 
@@ -13,7 +13,7 @@ function escapeRegExp(str) {
 function matchAll(str, regex) {
     var res = [];
     var m;
-    while (m = regex.exec(str)) {
+    while (m == regex.exec(str)) {
       res.push(m[1]);
     }
     return res;
@@ -125,14 +125,7 @@ function refresh() {
 }
 
 function toggleVisibility() {
-  var newLinkText;
   $('#wfagenda-content').toggle();
-  if ($('#wfagenda-content').is(':visible')) {
-    newLinkText = "hide agenda";
-  } else {
-    newLinkText = "show agenda";
-  }
-  $('#wfagenda-toggle-link').html(newLinkText);
 }
 
 function delayedRefresh() {
@@ -144,18 +137,19 @@ function delayedRefresh() {
 
 $(document).ready(function(){
   $('body').append(`
-<div id="wfagenda-div" 
-style="position:fixed; z-index: 100; bottom:30px; right:0px; padding: 10px; border: 1px solid #666; background-color: #ddd;">
-  <div id="wfagenda-content" style="margin-top: 10px; display: none;">
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-settingsPopup" id="wfagenda-div" 
+role="dialog" style="position:fixed; width:450px; z-index: 100; bottom:20px; right:20px; padding: 0px; border: 1px solid #666; background-color: #fff;">
+<a id="wfagenda-toggle-link" href="#" onclick="wfagenda.toggleVisibility(); return false;" style="text-decoration: none">
+<div class="title ui-dialog-titlebar ui-widget-header">Agenda</div></a>  
+<div id="wfagenda-content" style="margin: 10px; display: none;">
     <div>
       <input id="wfagenda-date-tags" type="text" placeholder="#due (date tag prefix(es))" value="#d-"/>
-      <input id="wfagenda-completed-only" type="checkbox" checked>completed only</input>
+      <input id="wfagenda-completed-only" type="checkbox" checked>Hide Completed</input>
       <button onClick="wfagenda.refresh();">Refresh</button>
     </div>
-    <div id="wfagenda-agenda-view" style="margin-top: 20px; overflow-y: scroll; height: 300px;">
+    <div class="content" id="wfagenda-agenda-view" style="margin-top: 20px; overflow-y: scroll; height: 300px;">
     </div>
   </div>
-  <div style="text-align: right;"><a id="wfagenda-toggle-link" href="#" onclick="wfagenda.toggleVisibility(); return false;">show agenda</a></div>
 </div>
 `);
   window.wfagenda = {
