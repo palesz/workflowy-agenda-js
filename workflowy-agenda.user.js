@@ -145,7 +145,7 @@ role="dialog" style="position:fixed; width:450px; z-index: 100; bottom:20px; rig
     <div>
       <input id="wfagenda-date-tags" type="text" placeholder="#due (date tag prefix(es))" value="#d-"/>
       <input id="wfagenda-completed-only" type="checkbox" checked>Hide Completed</input>
-      <button onClick="wfagenda.refresh();">Refresh</button>
+      <div onClick="wfagenda.refresh(); id="currentTheme" class="fancyButton galleryShowButton">Refresh</div>
     </div>
     <div class="content" id="wfagenda-agenda-view" style="margin-top: 20px; overflow-y: scroll; height: 300px;">
     </div>
